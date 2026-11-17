@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nehemías y Karina: falta poco</title>
+<style>
+  :root{
+    --rose:#c98a92;
+    --rose-dark:#8f4d55;
+    --rose-deep:#733e45;
+    --cream:#fbf6f2;
+    --gold:#b98a4e;
+    --ink:#3a2e2e;
+    --muted:#6b5a5a;
+    --line:#eadbd6;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+    background:var(--cream);
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.num{font-family:Georgia,"Times New Roman",serif;font-weight:400;}
+  a{color:var(--rose-dark);}
+  :focus-visible{outline:3px solid var(--gold);outline-offset:3px;}
+
+  /* Hero con cuenta regresiva */
+  .hero{
+    background:var(--rose-dark);
+    color:#fff;
+    text-align:center;
+    padding:64px 20px 56px;
+  }
+  .hero h1{
+    font-size:clamp(30px,8vw,46px);
+    margin:0 0 6px;
+    line-height:1.2;
+  }
+  .hero .when{
+    margin:0 0 36px;
+    color:#f1d9dc;
+    font-size:16px;
+  }
+  .countdown{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:8px;
+    max-width:560px;
+    margin:0 auto;
+  }
+  .unit{
+    border-top:1px solid rgba(255,255,255,.35);
+    padding-top:12px;
+  }
+  .num{
+    display:block;
+    font-size:clamp(38px,12vw,72px);
+    line-height:1;
+    font-variant-numeric:tabular-nums;
+  }
+  .label{
+    display:block;
+    margin-top:8px;
+    font-size:14px;
+    color:#f1d9dc;
+  }
+  .hero .done{
+    font-family:Georgia,serif;
+    font-size:clamp(26px,7vw,38px);
+    margin:0;
+  }
+  .hero-actions{margin-top:36px;}
+
+  /* Layout general */
+  main{max-width:640px;margin:0 auto;padding:0 20px 56px;}
+  section{padding:44px 0 0;}
+  h2{font-size:26px;color:var(--rose-dark);margin:0 0 14px;line-height:1.25;}
+  h3{font-size:19px;margin:0 0 4px;color:var(--ink);}
+  p{margin:0 0 14px;color:var(--muted);}
+
+  .btn{
+    display:inline-block;
+    padding:12px 20px;
+    border-radius:8px;
+    border:1px solid var(--rose-dark);
+    background:var(--rose-dark);
+    color:#fff;
+    font:inherit;
+    font-size:15px;
+    text-decoration:none;
+    cursor:pointer;
+    margin:0 8px 10px 0;
+  }
+  .btn:hover{background:var(--rose-deep);}
+  .btn.ghost{background:transparent;color:var(--rose-dark);}
+  .btn.ghost:hover{background:#f6e9e7;}
+  .hero .btn{background:#fff;color:var(--rose-dark);border-color:#fff;}
+  .hero .btn:hover{background:#f6e9e7;}
+
+  /* Fechas del evento */
+  .day{
+    padding:0 0 22px 18px;
+    border-left:3px solid var(--gold);
+    margin-bottom:6px;
+  }
+  .day p{margin:0;}
+  .day .what{color:var(--ink);}
+
+  /* Actividades */
+  .acts{list-style:none;margin:0;padding:0;}
+  .acts li{
+    padding:14px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .acts li:last-child{border-bottom:none;}
+  .acts strong{display:block;color:var(--ink);font-family:Georgia,serif;font-weight:400;font-size:18px;}
+  .acts span{color:var(--muted);font-size:15px;}
+  .note{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:14px 16px;
+    margin-top:18px;
+    color:var(--ink);
+    font-size:15px;
+  }
+
+  /* Confirmación */
+  .confirm{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:24px 22px 14px;
+  }
+  .confirm h2{margin-top:0;}
+  .checklist{margin:0 0 16px;padding-left:20px;color:var(--muted);}
+  .checklist li{margin-bottom:4px;}
+  .linklike{
+    background:none;border:none;padding:0;font:inherit;font-size:13px;
+    color:var(--muted);text-decoration:underline;cursor:pointer;
+  }
+  [hidden]{display:none !important;}
+
+  /* Aporte */
+  .alias-box{
+    display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+    background:#fff;border:1px solid var(--line);border-radius:10px;
+    padding:14px 16px;
+  }
+  .alias-label{color:var(--muted);font-size:14px;}
+  .alias{
+    font-family:Georgia,serif;font-size:20px;color:var(--rose-dark);
+    word-break:break-all;flex:1 1 140px;
+  }
+  .alias-box .btn{margin:0;padding:9px 16px;}
+  .form-msg{margin:10px 0 0;min-height:1.4em;font-size:14px;color:#3b6b45;}
+
+  footer{
+    text-align:center;color:var(--muted);font-size:14px;
+    padding:8px 20px 48px;
+  }
+  footer .num{font-size:20px;color:var(--rose-dark);display:block;margin-bottom:4px;}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <h1>Nehemías y Karina</h1>
+  <p class="when">Nos casamos el domingo 22 de noviembre, 11:30 hs</p>
+
+  <div class="countdown" id="countdown" role="timer" aria-label="Cuenta regresiva para la boda">
+    <div class="unit"><span class="num" id="cd-d">0</span><span class="label">días</span></div>
+    <div class="unit"><span class="num" id="cd-h">0</span><span class="label">horas</span></div>
+    <div class="unit"><span class="num" id="cd-m">0</span><span class="label">minutos</span></div>
+    <div class="unit"><span class="num" id="cd-s">0</span><span class="label">segundos</span></div>
+  </div>
+  <p class="done" id="cd-done" hidden></p>
+
+  <div class="hero-actions">
+    <a class="btn" href="#calendario">Guardar en mi calendario</a>
+  </div>
+</header>
+
+<main>
+
+  <section id="evento">
+    <h2>Cómo va a ser el fin de semana</h2>
+
+    <div class="day">
+      <h3>Viernes 20 de noviembre, 10:40 hs</h3>
+      <p class="what">Casamiento civil.</p>
+    </div>
+
+    <div class="day">
+      <h3>Domingo 22 de noviembre, 11:30 hs</h3>
+      <p class="what">Ceremonia en Casona Rosada, Eugenia Ottone de Asconape 480, Paso del Rey, Buenos Aires.</p>
+    </div>
+
+    <p>Después de la ceremonia seguimos la fiesta en el mismo lugar. Hay tres cosas para hacer:</p>
+
+    <ul class="acts">
+      <li>
+        <strong>Pileta</strong>
+        <span>Si te querés meter al agua, traé traje de baño.</span>
+      </li>
+      <li>
+        <strong>Cancha de pádel</strong>
+        <span>Para armar partidos entre invitados.</span>
+      </li>
+      <li>
+        <strong>Cancha de fútbol</strong>
+        <span>Para el que prefiera la pelota.</span>
+      </li>
+    </ul>
+
+    <div class="note">
+      Si vas a jugar, llevá ropa y calzado cómodos para cambiarte después de la ceremonia.
+    </div>
+  </section>
+
+  <section id="calendario">
+    <h2>Guardalo en tu calendario</h2>
+    <p>El archivo para el calendario incluye el civil y la boda, con un aviso un día antes y otro dos horas antes.</p>
+    <button class="btn" id="btn-ics" type="button">Descargar para el calendario</button>
+    <a class="btn ghost" id="btn-gcal-civil" target="_blank" rel="noopener">Google Calendar: civil</a>
+    <a class="btn ghost" id="btn-gcal-fiesta" target="_blank" rel="noopener">Google Calendar: boda</a>
+  </section>
+
+  <section id="asistencia">
+    <div class="confirm">
+      <div id="state-ask">
+        <h2>¿Ya confirmaste tu asistencia?</h2>
+        <p>Necesitamos saber cuántos vamos a ser para organizar todo.</p>
+        <button class="btn" id="btn-yes" type="button">Sí, ya confirmé</button>
+        <a class="btn ghost" id="btn-go" href="#">Todavía no, quiero confirmar</a>
+      </div>
+
+      <div id="state-yes" hidden>
+        <h2>Tu lugar está confirmado</h2>
+        <p id="reminder-line">Te esperamos. Para el día de la boda:</p>
+        <ul class="checklist">
+          <li>Traje de baño, si querés usar la pileta.</li>
+          <li>Ropa y calzado cómodos para pádel o fútbol.</li>
+          <li>Llegar a las 11:30 hs a Casona Rosada.</li>
+        </ul>
+        <a class="btn" id="btn-map" target="_blank" rel="noopener">Cómo llegar</a>
+        <p><button class="linklike" id="btn-reset" type="button">No confirmé todavía</button></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="aporte">
+    <h2>Gracias por acompañarnos</h2>
+    <p>Tenerte con nosotros ese día es lo más importante. Si además querés tener un detalle y ayudarnos a empezar esta nueva etapa, podés hacerlo con un aporte a este alias.</p>
+    <div class="alias-box">
+      <span class="alias-label">Alias</span>
+      <span class="alias" id="alias-text"></span>
+      <button class="btn ghost" id="btn-copy" type="button">Copiar alias</button>
+    </div>
+    <p class="form-msg" id="copy-msg" role="status" aria-live="polite"></p>
+  </section>
+
+</main>
+
+<footer>
+  <span class="num">Nehemías y Karina</span>
+  Gracias por ser parte de este día.
+</footer>
+
+<script>
+/* ====== Configuración: editá estos valores ====== */
+const INVITACION_URL = 'https://nehemias-lezcano.github.io/invitacion/';   // link a la web de invitación
+const FIESTA_INICIO_UTC = '20261122T143000Z';  // 22/11/2026 11:30 hs Argentina (UTC-3)
+const FIESTA_FIN_UTC    = '20261122T203000Z';  // 17:30 hs: cambialo si la fiesta termina a otra hora
+const CIVIL_INICIO_UTC  = '20261120T134000Z';  // 20/11/2026 10:40 hs Argentina
+const CIVIL_FIN_UTC     = '20261120T144000Z';  // 11:40 hs
+const LUGAR = 'Casona Rosada, Eugenia Ottone de Asconape 480, Paso del Rey, Buenos Aires';
+const FECHA_BODA = new Date('2026-11-22T11:30:00-03:00');
+const ALIAS = 'COMPLETAR.ALIAS';  // reemplazalo por tu alias real
+/* ================================================= */
+
+const EVENTOS = [
+  { titulo: 'Casamiento civil de Nehemías y Karina', inicio: CIVIL_INICIO_UTC, fin: CIVIL_FIN_UTC,
+    detalle: 'Casamiento civil.', lugar: '' },
+  { titulo: 'Boda de Nehemías y Karina', inicio: FIESTA_INICIO_UTC, fin: FIESTA_FIN_UTC,
+    detalle: 'Ceremonia y fiesta. Hay pileta (traer traje de baño), cancha de pádel y de fútbol.', lugar: LUGAR }
+];
+
+/* Cuenta regresiva */
+const $ = id => document.getElementById(id);
+function tick(){
+  const diff = FECHA_BODA - new Date();
+  if (diff > 0){
+    const s = Math.floor(diff/1000);
+    $('cd-d').textContent = Math.floor(s/86400);
+    $('cd-h').textContent = Math.floor((s%86400)/3600);
+    $('cd-m').textContent = Math.floor((s%3600)/60);
+    $('cd-s').textContent = s%60;
+    updateReminder(Math.floor(s/86400));
+  } else {
+    $('countdown').hidden = true;
+    const done = $('cd-done');
+    done.hidden = false;
+    done.textContent = diff > -12*3600*1000 ? '¡Hoy es el día!' : 'Gracias por acompañarnos.';
+  }
+}
+tick();
+setInterval(tick, 1000);
+
+/* Calendario */
+const esc = s => String(s).replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/\n/g,'\\n');
+function buildICS(){
+  const stamp = new Date().toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'');
+  const lines = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Nehemias y Karina//Boda//ES','CALSCALE:GREGORIAN'];
+  EVENTOS.forEach((e,i)=>{
+    lines.push('BEGIN:VEVENT',
+      'UID:boda-nk-'+i+'@nehemias-lezcano.github.io',
+      'DTSTAMP:'+stamp,
+      'DTSTART:'+e.inicio,
+      'DTEND:'+e.fin,
+      'SUMMARY:'+esc(e.titulo),
+      'DESCRIPTION:'+esc(e.detalle));
+    if (e.lugar) lines.push('LOCATION:'+esc(e.lugar));
+    lines.push(
+      'BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:'+esc(e.titulo+' es mañana'),'TRIGGER:-P1D','END:VALARM',
+      'BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:'+esc(e.titulo+' es en 2 horas'),'TRIGGER:-PT2H','END:VALARM',
+      'END:VEVENT');
+  });
+  lines.push('END:VCALENDAR');
+  return lines.join('\r\n');
+}
+$('btn-ics').addEventListener('click', ()=>{
+  const blob = new Blob([buildICS()], {type:'text/calendar;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'boda-nehemias-karina.ics';
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url), 1000);
+});
+function gcalLink(e){
+  const p = new URLSearchParams({action:'TEMPLATE', text:e.titulo, dates:e.inicio+'/'+e.fin, details:e.detalle});
+  if (e.lugar) p.set('location', e.lugar);
+  return 'https://calendar.google.com/calendar/render?'+p.toString();
+}
+$('btn-gcal-civil').href = gcalLink(EVENTOS[0]);
+$('btn-gcal-fiesta').href = gcalLink(EVENTOS[1]);
+
+/* Confirmación y redirección */
+const KEY = 'boda_confirmado';
+const getFlag = () => { try { return localStorage.getItem(KEY) === 'si'; } catch(e){ return false; } };
+const setFlag = v => { try { v ? localStorage.setItem(KEY,'si') : localStorage.removeItem(KEY); } catch(e){} };
+$('btn-go').href = INVITACION_URL;
+$('btn-map').href = 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(LUGAR);
+
+function renderState(){
+  const yes = getFlag();
+  $('state-yes').hidden = !yes;
+  $('state-ask').hidden = yes;
+}
+function updateReminder(dias){
+  let t = 'Te esperamos. Para el día de la boda:';
+  if (dias === 0) t = 'La boda es hoy. Para no olvidarte:';
+  else if (dias <= 7) t = 'Falta menos de una semana. Para no olvidarte:';
+  $('reminder-line').textContent = t;
+}
+$('btn-yes').addEventListener('click', ()=>{ setFlag(true); renderState(); });
+$('btn-reset').addEventListener('click', ()=>{ setFlag(false); renderState(); });
+renderState();
+
+/* Alias para el aporte */
+$('alias-text').textContent = ALIAS;
+$('btn-copy').addEventListener('click', async ()=>{
+  const msg = $('copy-msg');
+  try {
+    await navigator.clipboard.writeText(ALIAS);
+    msg.textContent = 'Alias copiado. ¡Gracias!';
+  } catch(e){
+    msg.textContent = 'No se pudo copiar solo. Seleccioná el alias y copialo.';
+  }
+});
+</script>
+</body>
+</html>
